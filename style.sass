@@ -1,0 +1,120 @@
+*,
+*::before,
+*::after
+	box-sizing: border-box
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	user-select: none
+	-webkit-tap-highlight-color: transparent
+
+html
+	background-color: #020209
+	color: #844aa3
+	background-image: url('img/bg.png')
+
+body
+	padding: 0
+	margin: 0
+
+button
+	border: 2px solid #844aa3
+	border-radius: 3px
+	background: #020209
+	padding: 0
+	color: #844aa3
+	font-weight: bold
+	cursor: pointer
+	transition: all 0.1s ease
+	
+	&:active
+		transform: translateY(2px)
+
+
+input[type=range]
+	-webkit-appearance: none
+	width: 100%
+	margin: 8.9px 0
+	
+	&:focus
+		outline: none
+	
+	&::-webkit-slider-runnable-track
+		width: 100%
+		height: 6.2px
+		cursor: pointer
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		background: #7671a9
+		border-radius: 0.2px
+		border: 0.2px solid #010101
+	
+	&::-webkit-slider-thumb
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		border: 1px solid #000000
+		height: 24px
+		width: 33px
+		border-radius: 3px
+		background: #764b9f
+		cursor: pointer
+		-webkit-appearance: none
+		margin-top: -9.1px
+	
+	&:focus::-webkit-slider-runnable-track
+		background: #8581b3
+	
+	&::-moz-range-track
+		width: 100%
+		height: 6.2px
+		cursor: pointer
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		background: #7671a9
+		border-radius: 0.2px
+		border: 0.2px solid #010101
+	
+	&::-moz-range-thumb
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		border: 1px solid #000000
+		height: 24px
+		width: 33px
+		border-radius: 3px
+		background: #764b9f
+		cursor: pointer
+	
+	&::-ms-track
+		width: 100%
+		height: 6.2px
+		cursor: pointer
+		background: transparent
+		border-color: transparent
+		color: transparent
+	
+	&::-ms-fill-lower
+		background: #67619f
+		border: 0.2px solid #010101
+		border-radius: 0.4px
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+	
+	&::-ms-fill-upper
+		background: #7671a9
+		border: 0.2px solid #010101
+		border-radius: 0.4px
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+	
+	&::-ms-thumb
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		border: 1px solid #000000
+		height: 24px
+		width: 33px
+		border-radius: 3px
+		background: #764b9f
+		cursor: pointer
+		height: 6.2px
+	
+	&:focus::-ms-fill-lower
+		background: #7671a9
+	
+	
+	input[type=range]:focus::-ms-fill-upper
+		background: #8581b3
