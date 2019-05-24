@@ -1,3 +1,37 @@
+$color_bg: #141617
+$color_module_bg: #1F2325
+$color_white: #ffffff
+$color_h1: #0A77BD
+$color_h2: rgba($color_white, 0.54)
+$color_text: rgba($color_white, 0.38)
+$color_divider: #3f3f3f
+
+
+%module
+	background-color: $color_module_bg
+
+%pad
+	margin: 10px
+	min-height: 30px
+	min-width: 30px
+	box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.25)
+	background-color: #252f39
+
+%pad-active
+	background-color: #0A77BD
+
+%label
+	font-family: Roboto
+	font-style: normal
+	font-weight: normal
+	font-size: 12px
+	line-height: 14px
+	letter-spacing: 0.05em
+
+%divider
+	background-color: $color_divider
+	height: 2px
+
 *,
 *::before,
 *::after
@@ -10,27 +44,113 @@
 	user-select: none
 	-webkit-tap-highlight-color: transparent
 
+
+section
+	@extend %module
+	margin: 10px
+	padding: 10px
+
+h1
+	color: $color_h1
+	
+	font-style: normal
+	font-weight: 500
+	font-size: 18px
+	line-height: 21px
+	letter-spacing: 0.05em
+	text-transform: uppercase
+
+h2
+	color: $color_h2
+	
+	font-family: Roboto
+	font-style: normal
+	font-weight: 500
+	font-size: 14px
+	line-height: 16px
+	letter-spacing: 0.05em
+
+
+p
+	font-family: Roboto
+	font-style: normal
+	font-weight: normal
+	font-size: 14px
+	line-height: 16px
+	letter-spacing: 0.05em
+
+hr
+	@extend %divider
+	border: none
+
+
 html
-	background-color: #020209
-	color: #844aa3
-	background-image: url('img/bg.png')
+	background-color: $color_bg
+	color: $color_text
 
 body
 	padding: 0
 	margin: 0
 
+
 button
-	border: 2px solid #844aa3
-	border-radius: 3px
-	background: #020209
-	padding: 0
-	color: #844aa3
-	font-weight: bold
+	background: none
+	border: none
+	padding: 0px
 	cursor: pointer
-	transition: all 0.1s ease
 	
-	&:active
-		transform: translateY(2px)
+	// transition: all 0.1s ease
+	
+	// &:active
+	//	transform: translateY(2px)
+	
+	// @extend %label
+	
+	
+	&.button
+		margin: 10px
+		height: 36px
+		min-width: 100px
+		border-radius: 2px
+		
+		font-family: Roboto
+		font-style: normal
+		font-weight: 500
+		font-size: 14px
+		line-height: 16px
+		text-align: center
+		letter-spacing: 0.05em
+		text-transform: uppercase
+		
+		color: $color_text
+		border: 1px solid #252F39
+		
+		&.prior
+			background-color: #0A77BD
+			color: #fff
+			border: none
+			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 0px 2px rgba(0, 0, 0, 0.12)
+	
+	&.pad
+		@extend %pad
+	
+	&.pad.active
+		@extend %pad-active
+	
+	$control_size: 60px
+	
+	&.play
+		width: $control_size
+		height: $control_size
+		background-image: url('img/play.svg')
+		background-size: 100%
+	
+	&.pause
+		width: $control_size
+		height: $control_size
+		background-image: url('img/pause.svg')
+		background-size: 100%
+
 
 
 input[type=range]
@@ -118,3 +238,24 @@ input[type=range]
 	
 	input[type=range]:focus::-ms-fill-upper
 		background: #8581b3
+
+
+.color
+	margin-top: 30px
+	margin-bottom: 30px
+	display: grid
+	grid-template-columns: 0fr 0fr 1fr
+	justify-content: left
+	align-items: center
+	
+	.title
+	
+	.example
+		width: 60px
+		height: 30px
+		margin-left: 20px
+		margin-right: 20px
+		outline: 1px solid black
+		
+	
+	.code
