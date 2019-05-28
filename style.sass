@@ -156,91 +156,213 @@ button
 
 
 
-input[type=range]
-	-webkit-appearance: none
+input[type=range].test
 	width: 100%
 	margin: 8.9px 0
 	
-	&:focus
+	height: 5px
+	
+	-webkit-appearance: none
+	-moz-appearance: none
+	
+	outline: none
+	
+	&::-moz-focus-outer
+		border: 0
+	
+	
+	
+	=thumb
+		display: block
+		width: 20px
+		height: 20px
+		border: 1px solid orange
+		background-color: orange
+		border-radius: 50%
+		cursor: pointer
+		outline: none
+		position: relative
+		
+	
+	=track
+		height: 5px
+		background: red
 		outline: none
 	
-	&::-webkit-slider-runnable-track
-		width: 100%
-		height: 6.2px
-		cursor: pointer
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
-		background: #7671a9
-		border-radius: 0.2px
-		border: 0.2px solid #010101
+	=active
+		height: 5px
+		background: green
+		outline: none
 	
-	&::-webkit-slider-thumb
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
-		border: 1px solid #000000
-		height: 24px
-		width: 33px
-		border-radius: 3px
-		background: #764b9f
-		cursor: pointer
-		-webkit-appearance: none
-		margin-top: -9.1px
-	
-	&:focus::-webkit-slider-runnable-track
-		background: #8581b3
-	
-	&::-moz-range-track
-		width: 100%
-		height: 6.2px
-		cursor: pointer
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
-		background: #7671a9
-		border-radius: 0.2px
-		border: 0.2px solid #010101
-	
-	&::-moz-range-thumb
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
-		border: 1px solid #000000
-		height: 24px
-		width: 33px
-		border-radius: 3px
-		background: #764b9f
-		cursor: pointer
-	
-	&::-ms-track
-		width: 100%
-		height: 6.2px
-		cursor: pointer
-		background: transparent
-		border-color: transparent
-		color: transparent
-	
-	&::-ms-fill-lower
-		background: #67619f
-		border: 0.2px solid #010101
-		border-radius: 0.4px
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
-	
-	&::-ms-fill-upper
-		background: #7671a9
-		border: 0.2px solid #010101
-		border-radius: 0.4px
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
 	
 	&::-ms-thumb
-		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
-		border: 1px solid #000000
-		height: 24px
-		width: 33px
-		border-radius: 3px
-		background: #764b9f
+		+thumb
+		
+	&::-ms-track
+		+track
+	
+	&::-ms-fill-lower
+		+active
+	
+	&::-ms-fill-upper
+	
+	
+	&::-moz-range-thumb
+		-moz-appearance: none
+		+thumb
+	
+	&::-moz-range-track
+		-moz-appearance: none
+		+track
+	
+	&::-moz-range-progress
+		-moz-appearance: none
+		+active
+	
+	
+	&::-webkit-slider-thumb
+		-webkit-appearance: none
+		+thumb
+		box-shadow: -2000px 0 0 2000px #43e5f7
+		clip-path: polygon(-1000px 3px, 100% 3px, 100% 6px, 100% 100%, 0 100%);
+		
+	
+	&::-webkit-slider-runnable-track
+		-webkit-appearance: none
+		+track
+	
+	&::-webkit-progress-value
+		+active
+	
+	
+	
+input[type="range"]
+	$height: 40px;
+	$thumb-height: 15px;
+	$track-height: 4px;
+	
+	// colours
+	$upper-color: #cfcfcf;
+	$lower-color: #0199ff;
+	$thumb-color: #0199ff;
+	$thumb-hover-color: #55c2ff;
+	
+	$upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 50% / 100% $track-height no-repeat transparent;
+	$lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
+	
+	
+	@function webkit-slider-thumb-shadow($i: 1)
+		$val: #{$i}px 0 0 -#{($thumb-height - $track-height) / 2} #{$upper-color}
+		@if $i == 1
+			@for $k from 2 through 1000
+				$val: #{$val}, webkit-slider-thumb-shadow($k)
+			
+		
+		@return $val
+	
+	&
+		display: block
+		appearance: none
+		width: 100%
+		margin: 0
+		height: $height
+		overflow: hidden
+		background: transparent
 		cursor: pointer
-		height: 6.2px
+		
+		&:focus
+			outline: none
 	
-	&:focus::-ms-fill-lower
-		background: #7671a9
+	
+	// Webkit
+	&::-webkit-slider-runnable-track
+		width: 100%
+		height: $height
+		background: $lower-background
 	
 	
-	input[type=range]:focus::-ms-fill-upper
-		background: #8581b3
+	&::-webkit-slider-thumb
+		position: relative
+		appearance: none
+		height: $thumb-height
+		width: $thumb-height
+		background: $thumb-color
+		border-radius: 100%
+		border: 0
+		top: 50%
+		margin-top: (-$thumb-height/2)
+		box-shadow: webkit-slider-thumb-shadow()
+		transition: background-color 150ms
+	
+	// Firefox
+	&::-moz-range-track,
+	&::-moz-range-progress
+		width: 100%
+		height: $height
+		background: $upper-background
+	
+	
+	&::-moz-range-progress
+		background: $lower-background
+	
+	
+	&::-moz-range-thumb
+		appearance: none
+		margin: 0
+		height: $thumb-height
+		width: $thumb-height
+		background: $thumb-color
+		border-radius: 100%
+		border: 0
+		transition: background-color 150ms
+	
+	
+	// Internet Exploder
+	&::-ms-track
+		width: 100%
+		height: $height
+		border: 0
+		// color needed to hide track marks
+		color: transparent
+		background: transparent
+	
+	
+	&::-ms-fill-lower
+		background: $lower-background
+	
+	
+	&::-ms-fill-upper
+		background: $upper-background
+	
+	
+	&::-ms-thumb
+		appearance: none
+		height: $thumb-height
+		width: $thumb-height
+		background: $thumb-color
+		border-radius: 100%
+		border: 0
+		transition: background-color 150ms
+		// IE Edge thinks it can support -webkit prefixes
+		top: 0
+		margin: 0
+		box-shadow: none
+	
+	
+	&:hover,
+	&:focus
+		
+		&::-webkit-slider-thumb
+			background-color: $thumb-hover-color
+		
+		&::-moz-range-thumb
+			background-color: $thumb-hover-color
+		
+		&::-ms-thumb
+			background-color: $thumb-hover-color
+	
+	
+	
 
 
 .color
@@ -262,3 +384,10 @@ input[type=range]
 		
 	
 	.code
+
+
+
+
+
+
+
