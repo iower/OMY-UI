@@ -29,8 +29,29 @@ html
 			h2 Pads
 			hr
 			
-			button.pad
-			button.pad.active
+			.pads
+				
+				.item
+					button.pad.ref
+					div Default 1/4
+				
+				.item
+					button.pad
+					div Default
+				
+				.item
+					button.pad.active
+					div Active
+				
+				.item
+					button.pad.playing
+					div Default playing
+				
+				.item
+					button.pad.active.playing
+					div Active playing
+			
+			
 			
 			h2 Buttons
 			hr
