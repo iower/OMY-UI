@@ -38,7 +38,7 @@ gulp.task('sass-watch', function () {
 
 gulp.task('sass-compile-reload', function () {
 	console.log(new Date(), 'Recompile styles...')
-	gulp.src('./style.sass')
+	gulp.src('./*.sass')
 		.pipe(sass({outputStyle: 'compressed'}).on('error', notify.onError(function (error) {
 			return error.message;
 		})))

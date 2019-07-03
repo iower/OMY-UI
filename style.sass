@@ -57,6 +57,14 @@ $color_divider: #3f3f3f
 	user-select: none
 	-webkit-tap-highlight-color: transparent
 
+html
+	background-color: $color_bg
+	color: $color_text
+
+body
+	padding: 0
+	margin: 0
+	font-family: 'Roboto'
 
 section
 	@extend %module
@@ -83,7 +91,6 @@ h2
 	line-height: 16px
 	letter-spacing: 0.05em
 
-
 p
 	font-family: Roboto
 	font-style: normal
@@ -95,17 +102,6 @@ p
 hr
 	@extend %divider
 	border: none
-
-
-html
-	background-color: $color_bg
-	color: $color_text
-
-body
-	padding: 0
-	margin: 0
-	font-family: 'Roboto'
-
 
 button
 	background: none
@@ -176,123 +172,41 @@ button
 		background-size: 100%
 
 
-
-input[type=range].test
-	width: 100%
-	margin: 8.9px 0
-	
-	height: 5px
-	
-	-webkit-appearance: none
-	-moz-appearance: none
-	
-	outline: none
-	
-	&::-moz-focus-outer
-		border: 0
-	
-	
-	
-	=thumb
-		display: block
-		width: 20px
-		height: 20px
-		border: 1px solid orange
-		background-color: orange
-		border-radius: 50%
-		cursor: pointer
-		outline: none
-		position: relative
-		
-	
-	=track
-		height: 5px
-		background: red
-		outline: none
-	
-	=active
-		height: 5px
-		background: green
-		outline: none
-	
-	
-	&::-ms-thumb
-		+thumb
-		
-	&::-ms-track
-		+track
-	
-	&::-ms-fill-lower
-		+active
-	
-	&::-ms-fill-upper
-	
-	
-	&::-moz-range-thumb
-		-moz-appearance: none
-		+thumb
-	
-	&::-moz-range-track
-		-moz-appearance: none
-		+track
-	
-	&::-moz-range-progress
-		-moz-appearance: none
-		+active
-	
-	
-	&::-webkit-slider-thumb
-		-webkit-appearance: none
-		+thumb
-		box-shadow: -2000px 0 0 2000px #43e5f7
-		clip-path: polygon(-1000px 3px, 100% 3px, 100% 6px, 100% 100%, 0 100%);
-		
-	
-	&::-webkit-slider-runnable-track
-		-webkit-appearance: none
-		+track
-	
-	&::-webkit-progress-value
-		+active
-	
-	
-	
 input[type="range"]
 	$height: 40px;
-	$thumb-height: 15px;
-	$track-height: 4px;
+	$thumb-size: 18px;
+	$track-height: 2px;
 	
-	// colours
-	$upper-color: #cfcfcf;
-	$lower-color: #0199ff;
-	$thumb-color: #0199ff;
-	$thumb-hover-color: #55c2ff;
+	// colors
+	$track-color: #3f3f3f
+	$track-active-color: #0A77BD
+	$thumb-color: #0A77BD
+	$thumb-hover-color: lighten(#0A77BD, 7%)
 	
-	$upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 50% / 100% $track-height no-repeat transparent;
-	$lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
+	$upper-background: linear-gradient(to bottom, $track-color, $track-color) 100% 50% / 100% $track-height no-repeat transparent
+	$lower-background: linear-gradient(to bottom, $track-active-color, $track-active-color) 100% 50% / 100% $track-height no-repeat transparent
 	
 	
 	@function webkit-slider-thumb-shadow($i: 1)
-		$val: #{$i}px 0 0 -#{($thumb-height - $track-height) / 2} #{$upper-color}
+		$val: #{$i}px 0 0 -#{($thumb-size - $track-height) / 2} #{$track-color}
 		@if $i == 1
 			@for $k from 2 through 1000
 				$val: #{$val}, webkit-slider-thumb-shadow($k)
-			
 		
 		@return $val
 	
 	&
-		display: block
 		appearance: none
+		-webkit-appearance: none
+		-moz-appearance: none
+		display: block
 		width: 100%
 		margin: 0
 		height: $height
 		overflow: hidden
 		background: transparent
+		outline: none
 		cursor: pointer
-		
-		&:focus
-			outline: none
 	
 	
 	// Webkit
@@ -301,19 +215,19 @@ input[type="range"]
 		height: $height
 		background: $lower-background
 	
-	
 	&::-webkit-slider-thumb
 		position: relative
 		appearance: none
-		height: $thumb-height
-		width: $thumb-height
+		height: $thumb-size
+		width: $thumb-size
 		background: $thumb-color
 		border-radius: 100%
 		border: 0
 		top: 50%
-		margin-top: (-$thumb-height/2)
+		margin-top: (-$thumb-size/2)
 		box-shadow: webkit-slider-thumb-shadow()
 		transition: background-color 150ms
+	
 	
 	// Firefox
 	&::-moz-range-track,
@@ -322,20 +236,21 @@ input[type="range"]
 		height: $height
 		background: $upper-background
 	
-	
 	&::-moz-range-progress
 		background: $lower-background
-	
 	
 	&::-moz-range-thumb
 		appearance: none
 		margin: 0
-		height: $thumb-height
-		width: $thumb-height
+		height: $thumb-size
+		width: $thumb-size
 		background: $thumb-color
 		border-radius: 100%
 		border: 0
 		transition: background-color 150ms
+	
+	&::-moz-focus-outer
+		border: 0
 	
 	
 	// Internet Exploder
@@ -343,35 +258,29 @@ input[type="range"]
 		width: 100%
 		height: $height
 		border: 0
-		// color needed to hide track marks
-		color: transparent
+		color: transparent // hide track marks
 		background: transparent
-	
 	
 	&::-ms-fill-lower
 		background: $lower-background
 	
-	
 	&::-ms-fill-upper
 		background: $upper-background
 	
-	
 	&::-ms-thumb
 		appearance: none
-		height: $thumb-height
-		width: $thumb-height
+		height: $thumb-size
+		width: $thumb-size
 		background: $thumb-color
 		border-radius: 100%
 		border: 0
 		transition: background-color 150ms
-		// IE Edge thinks it can support -webkit prefixes
 		top: 0
 		margin: 0
 		box-shadow: none
 	
 	
-	&:hover,
-	&:focus
+	&:hover
 		
 		&::-webkit-slider-thumb
 			background-color: $thumb-hover-color
@@ -381,45 +290,13 @@ input[type="range"]
 		
 		&::-ms-thumb
 			background-color: $thumb-hover-color
-	
-	
-	
 
 
-.color
-	margin-top: 30px
-	margin-bottom: 30px
-	display: grid
-	grid-template-columns: 0fr 0fr 1fr
-	justify-content: left
-	align-items: center
-	
-	.title
-	
-	.example
-		width: 60px
-		height: 30px
-		margin-left: 20px
-		margin-right: 20px
-		outline: 1px solid black
-		
-	
-	.code
+img[src*="omy-logo"]
+	width: 60px
 
 
-.pads
-	display: grid
-	grid-template-columns: 0fr 0fr 0fr 0fr 0fr
-	
-	.item
-		margin: 20px
-		text-align: center
-	
-	button.pad
-		
-	
-	div
-		
+
 
 
 
